@@ -1,26 +1,7 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
-
-import HomePage from 'pages/HomePage';
-import LoginPage from 'pages/LoginPage';
-import ProfilePage from 'pages/ProfilePage';
+import React from 'react';
 
 const App = () => {
-  return (
-    <Switch>
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <Route path="/profile">
-        <ProfilePage />
-      </Route>
-      <Route path="*">
-        <Redirect to="/" />
-      </Route>
-    </Switch>
-  );
+  return <div>Hello World</div>;
 };
 
 export default App;
