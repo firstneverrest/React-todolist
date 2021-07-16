@@ -25,6 +25,9 @@ const theme = createTheme({
       main: colors.default.success,
     },
   },
+  typography: {
+    fontFamily: ['Kanit', 'sans-serif'].join(','),
+  },
 });
 
 export default theme;
