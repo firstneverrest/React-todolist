@@ -10,16 +10,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: '50px',
+    marginTop: theme.spacing(10),
   },
   padding: {
-    padding: '11px 0',
+    padding: theme.spacing(3, 0),
   },
   margin: {
-    margin: '10px 0',
+    margin: theme.spacing(2, 0),
   },
   paper: {
-    marginTop: '20px 0',
+    marginTop: theme.spacing(5, 0),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -37,9 +37,9 @@ const LoginForm = () => {
     <Container component="main" maxWidth="xs" className={classes.container}>
       <div className={classes.paper}>
         <Avatar></Avatar>
-        <Typography component="h1" variant="h4" align="center">
+        <Typography component="h1" variant="h5" align="center">
           <Box mt={2} mb={1}>
-            Sign in
+            เข้าสู่ระบบ
           </Box>
         </Typography>
         <form>
@@ -71,13 +71,13 @@ const LoginForm = () => {
             className={`${classes.padding} ${classes.margin}`}
             fullWidth
           >
-            Sign in
+            เข้าสู่ระบบ
           </Button>
         </form>
 
-        <hr />
+        <Divider />
         <Link href="#" color="primary" variant="body1">
-          create an new account
+          สมัครสมาชิก
         </Link>
       </div>
     </Container>
