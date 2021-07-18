@@ -1,6 +1,8 @@
-export interface AuthContext {
+export interface Login {
   token: string;
-  isLoggedIn: boolean;
-  login: (token: string) => void;
-  logout: () => void;
+}
+
+export interface ButtonProps {
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  message: string;
 }
