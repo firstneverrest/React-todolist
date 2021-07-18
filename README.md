@@ -1,13 +1,10 @@
 # React To-do list
 
-<<<<<<< HEAD
-=======
 ## Technologies
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![image](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
 
->>>>>>> 02-create-sign-in
 ## Installation and Setup
 1. create react project with TypeScript template
 
@@ -37,6 +34,7 @@
 
     ```
     npm install --save @types/react-router-dom
+    npm install react-router-dom
     ```
 
 ## Start Project
