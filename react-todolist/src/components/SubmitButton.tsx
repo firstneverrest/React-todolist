@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ButtonProps } from 'type.model';
+
 // material ui component
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SubmitButton = () => {
+const SubmitButton: React.FC<ButtonProps> = ({ message }) => {
   const classes = useStyles();
   return (
     <Button
@@ -19,8 +21,9 @@ const SubmitButton = () => {
       color="primary"
       className={classes.root}
       fullWidth
+      type="submit"
     >
-      เข้าสู่ระบบ
+      {message}
     </Button>
   );
 };

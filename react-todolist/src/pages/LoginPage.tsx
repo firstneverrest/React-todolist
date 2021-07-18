@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 // material ui components
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +15,15 @@ import colors from 'styles/colors';
 
 // custom component
 import SubmitButton from 'components/SubmitButton';
+
+// axios
+import axios from 'axios';
+
+// type
+import { Login } from 'type.model';
+
+// utils
+import { setCookie } from 'utils/cookie';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,8 +44,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginPage = () => {
+  const [message, setMessage] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const messageColor: any = isError ? 'error' : 'inherit';
   const classes = useStyles();
 
+  const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const passwordChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const raw = JSON.stringify({
+      userid: username,
+      password: password,
+    });
+
+    axios
+      .post<Login>('https://learningportal.ocsc.go.th/todoapi/tokens', raw, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .then((response) => {
+        if (response.status === 200 || 201) {
+          const token = response.data.token;
+          setCookie('token', token, 1);
+          setMessage('เข้าสู่ระบบสำเร็จ');
+          setIsError(false);
+          setUsername('');
+          setPassword('');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsError(true);
+        setMessage('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+      });
+  };
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
       <Avatar></Avatar>
@@ -43,9 +95,10 @@ const LoginPage = () => {
           เข้าสู่ระบบ
         </Box>
       </Typography>
-      <form>
+      <form onSubmit={loginHandler}>
         <TextField
           variant="outlined"
+          error={isError}
           required
           fullWidth
           className={classes.textField}
@@ -54,9 +107,12 @@ const LoginPage = () => {
           name="username"
           autoComplete="username"
           autoFocus
+          onChange={usernameChangeHandler}
+          value={username}
         />
         <TextField
           variant="outlined"
+          error={isError}
           required
           fullWidth
           className={classes.textField}
@@ -65,8 +121,19 @@ const LoginPage = () => {
           label="รหัสผ่าน"
           name="password"
           autoComplete="password"
+          onChange={passwordChangeHandler}
+          value={password}
         />
-        <SubmitButton />
+        <Typography
+          component="h1"
+          variant="body1"
+          align="center"
+          color={messageColor}
+        >
+          <Box mb={2}>{message}</Box>
+        </Typography>
+
+        <SubmitButton message="เข้าสู่ระบบ" />
       </form>
       <Divider className={classes.divider} />
       <Link href="#" color="primary" variant="body1">
