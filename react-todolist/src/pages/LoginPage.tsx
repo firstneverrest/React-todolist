@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// change path
+import { useHistory } from 'react-router-dom';
+
 // material ui components
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -43,13 +46,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const messageColor: any = isError ? 'error' : 'inherit';
   const classes = useStyles();
+  const history = useHistory();
+  const messageColor: any = isError ? 'error' : 'inherit';
 
   const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -75,10 +79,11 @@ const LoginPage = () => {
         if (response.status === 200 || 201) {
           const token = response.data.token;
           setCookie('token', token, 1);
-          setMessage('เข้าสู่ระบบสำเร็จ');
+          setMessage('');
           setIsError(false);
           setUsername('');
           setPassword('');
+          history.push('/todo');
         }
       })
       .catch((error) => {

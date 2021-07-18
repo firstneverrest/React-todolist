@@ -1,11 +1,16 @@
 import React from 'react';
-import LoginPage from './pages/LoginPage';
+import { Switch, Route } from 'react-router-dom';
 
-const App = () => {
+import LoginPage from './pages/LoginPage';
+import TodoListPage from './pages/TodoListPage';
+
+const App: React.FC = () => {
   return (
-    <>
-      <LoginPage />
-    </>
+    <Switch>
+      <Route exact path="/" component={LoginPage} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/todo" component={TodoListPage} />
+    </Switch>
   );
 };
 
