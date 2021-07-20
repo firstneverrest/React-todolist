@@ -66,13 +66,13 @@ const LoginPage: React.FC = () => {
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const raw = JSON.stringify({
+    const data = JSON.stringify({
       userid: username,
       password: password,
     });
 
     axios
-      .post<Login>('https://learningportal.ocsc.go.th/todoapi/tokens', raw, {
+      .post<Login>('https://learningportal.ocsc.go.th/todoapi/tokens', data, {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {
