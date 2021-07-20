@@ -23,12 +23,11 @@ export interface TableTask {
   };
 }
 
-export interface TodoListData {
-  id: number;
-  name: string;
-  when: Date;
-  tableData?: {
-    id: number;
-    editing?: string | undefined;
-  };
+export interface TodoTable {
+  title: string;
+  columns: TableColumns[];
+  data: TableTask[];
+  editable?: object;
+  localization?: object;
+  options?: object;
 }
