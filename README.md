@@ -37,6 +37,12 @@
     npm install react-router-dom
     ```
 
+6. install material table
+
+    ```
+    npm install material-table
+    ```
+
 ## Start Project
 use npm to start React project in port 3000
 ```
