@@ -1,4 +1,11 @@
 # React To-do list
+Todo list web application using React, TypeScript and Material UI. This project has two pages: login page and todo list page which show as following.
+
+## Login Page
+![image](todolist-login-thumbnail.jpg)
+
+## Todo list page
+![image](todolist-table-thumbnail.jpg)
 
 ## Technologies
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
