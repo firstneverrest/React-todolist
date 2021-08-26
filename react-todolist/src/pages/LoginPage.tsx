@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
 // custom color
@@ -140,10 +138,6 @@ const LoginPage: React.FC = () => {
 
         <SubmitButton message="เข้าสู่ระบบ" />
       </form>
-      <Divider className={classes.divider} />
-      <Link href="#" color="primary" variant="body1">
-        สมัครสมาชิก
-      </Link>
     </Container>
   );
 };
