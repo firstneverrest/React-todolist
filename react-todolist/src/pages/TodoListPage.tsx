@@ -6,15 +6,19 @@ import Table from 'components/Table';
 // material ui
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import CustomButton from 'components/CustomButton';
 
 // interface
 import { TableColumns, TableTask } from 'type.model';
+
+// change path
+import { useHistory } from 'react-router-dom';
 
 // axios
 import axios from 'axios';
 
 // utils
-import { getCookie } from 'utils/cookie';
+import { getCookie, logout } from 'utils';
 
 // colors
 import colors from 'styles/colors';
@@ -33,10 +37,14 @@ const TodoListPage: React.FC = () => {
 
   // table rows
   const [task, setTask] = useState<TableTask[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     getTodoList();
-  }, []);
+    if (getCookie('token').length === 0) {
+      history.push('/login');
+    }
+  }, [history]);
 
   const getTodoList = () => {
     const token = getCookie('token');
@@ -120,6 +128,11 @@ const TodoListPage: React.FC = () => {
       });
   };
 
+  const logoutHandler = () => {
+    logout();
+    history.push('/login');
+  };
+
   const options = {
     actionsColumnIndex: -1,
     headerStyle: {
@@ -195,6 +208,9 @@ const TodoListPage: React.FC = () => {
           localization={localization}
           options={options}
         />
+        <Box mt={2}>
+          <CustomButton message="ออกจากระบบ" onClick={logoutHandler} />
+        </Box>
       </Box>
     </>
   );

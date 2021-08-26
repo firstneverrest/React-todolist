@@ -21,6 +21,5 @@ export const getCookie = (cname: string) => {
 };
 
 export const deleteCookie = (cname: string) => {
-  document.cookie =
-    'username=' + cname + '; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 };
