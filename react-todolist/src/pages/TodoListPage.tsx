@@ -6,7 +6,11 @@ import Table from 'components/Table';
 // material ui
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import CustomButton from 'components/CustomButton';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 
 // interface
 import { TableColumns, TableTask } from 'type.model';
@@ -37,6 +41,7 @@ const TodoListPage: React.FC = () => {
 
   // table rows
   const [task, setTask] = useState<TableTask[]>([]);
+  const [open, setOpen] = useState<boolean>(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -194,6 +199,29 @@ const TodoListPage: React.FC = () => {
 
   return (
     <>
+      <Collapse in={open}>
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          Login Successfully!
+        </Alert>
+      </Collapse>
+      <Box mt={2} mr={4} display="flex" justifyContent="flex-end">
+        <IconButton color="primary" onClick={logoutHandler}>
+          <ExitToAppIcon />
+        </IconButton>
+      </Box>
       <Box my={4} display="flex" flexDirection="column" alignItems="center">
         <Box mb={2}>
           <Typography component="h1" variant="h4">
@@ -208,9 +236,6 @@ const TodoListPage: React.FC = () => {
           localization={localization}
           options={options}
         />
-        <Box mt={2}>
-          <CustomButton message="ออกจากระบบ" onClick={logoutHandler} />
-        </Box>
       </Box>
     </>
   );
