@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from 'api';
 
 // change path
 import { useHistory } from 'react-router-dom';
@@ -16,9 +17,6 @@ import colors from 'styles/colors';
 
 // custom component
 import SubmitButton from 'components/SubmitButton';
-
-// axios
-import axios from 'axios';
 
 // type
 import { Login } from 'type.model';
@@ -64,15 +62,12 @@ const LoginPage: React.FC = () => {
   const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const data = JSON.stringify({
+    const data = {
       userid: username,
       password: password,
-    });
+    };
 
-    axios
-      .post<Login>('https://learningportal.ocsc.go.th/todoapi/tokens', data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
+    API.post<Login>('tokens', data)
       .then((response) => {
         if (response.status === 200 || 201) {
           const token = response.data.token;

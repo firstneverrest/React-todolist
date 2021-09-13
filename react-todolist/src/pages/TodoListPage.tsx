@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API from 'api';
 
 // components
 import Table from 'components/Table';
@@ -17,9 +18,6 @@ import { TableColumns, TableTask } from 'type.model';
 
 // change path
 import { useHistory } from 'react-router-dom';
-
-// axios
-import axios from 'axios';
 
 // utils
 import { getCookie, logout } from 'utils';
@@ -54,13 +52,9 @@ const TodoListPage: React.FC = () => {
   const getTodoList = () => {
     const token = getCookie('token');
 
-    axios
-      .get<TableTask[]>(
-        'https://learningportal.ocsc.go.th/todoapi/activities',
-        {
-          headers: { Authorization: 'Bearer ' + token },
-        }
-      )
+    API.get<TableTask[]>('activities', {
+      headers: { Authorization: 'Bearer ' + token },
+    })
       .then((response) => {
         if (response.status === 200) {
           let todoData = response.data;
@@ -80,10 +74,9 @@ const TodoListPage: React.FC = () => {
       when: when,
     };
 
-    axios
-      .post('https://learningportal.ocsc.go.th/todoapi/activities', data, {
-        headers: { Authorization: 'Bearer ' + token },
-      })
+    API.post('activities', data, {
+      headers: { Authorization: 'Bearer ' + token },
+    })
       .then((response) => {
         if (response.status === 201) {
           getTodoList();
@@ -102,10 +95,9 @@ const TodoListPage: React.FC = () => {
       when: when,
     };
 
-    axios
-      .put('https://learningportal.ocsc.go.th/todoapi/activities/' + id, data, {
-        headers: { Authorization: 'Bearer ' + token },
-      })
+    API.put('activities/' + id, data, {
+      headers: { Authorization: 'Bearer ' + token },
+    })
       .then((response) => {
         if (response.status === 201) {
           getTodoList();
@@ -119,10 +111,9 @@ const TodoListPage: React.FC = () => {
   const deleteTodoList = (id: number) => {
     const token = getCookie('token');
 
-    axios
-      .delete('https://learningportal.ocsc.go.th/todoapi/activities/' + id, {
-        headers: { Authorization: 'Bearer ' + token },
-      })
+    API.delete('activities/' + id, {
+      headers: { Authorization: 'Bearer ' + token },
+    })
       .then((response) => {
         if (response.status === 201) {
           getTodoList();
